@@ -448,7 +448,7 @@ app.get('/', async (req, res) => {
 
 
 
-app.get('mensagem', async (req, res) => {
+app.get('/teste', async (req, res) => {
     res.sendFile(__dirname + '/public/mensagem.html');
     const numero = req.query.numero;
 
