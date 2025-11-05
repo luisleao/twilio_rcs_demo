@@ -187,7 +187,7 @@ app.post('/message', async (req, res) => {
                 }
 
                 if (messageItem) {
-                        await sendPlaceDetails(message.To, message.From, messageItem);
+                        await sendPlaceDetails(message.From, message.To, messageItem);
                         // save messageHistory to firestore
                         messageHistory.push({
                             role: "assistant",
