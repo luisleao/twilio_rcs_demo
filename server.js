@@ -430,37 +430,44 @@ app.post('/message', async (req, res) => {
 app.get('/', async (req, res) => {
     res.send('OK');
 
-
-    await twilioClient.messages.create({
-        // from: RCS_AGENT,
-        // to: `rcs:${NUMERO_RCS}`,
-        to: `${NUMERO_RCS}`,
-        messagingServiceSid: `MG508c8549b6b658a437810445e255ea7e`,
-        contentSid: 'HX35de91b4c0cad1474133320ed84f22b4',
-        // contentVariables: ''
-        contentVariables: JSON.stringify({1: 'tourismlogorcs'}),
-        // body: 'Hello from RCS via Twilio!',
-    }).then(m => {
-        console.log('message sent', m.sid);
-    });
-
-
-    await twilioClient.messages.create({
-        // from: RCS_AGENT,
-        // to: `rcs:${NUMERO_PESSOAL}`,
-        to: `${NUMERO_PESSOAL}`,
-        messagingServiceSid: `MG508c8549b6b658a437810445e255ea7e`,
-        contentSid: 'HX35de91b4c0cad1474133320ed84f22b4',
-        // contentVariables: ''
-        contentVariables: JSON.stringify({1: 'tourismlogorcs'}),
-        // body: 'Hello from RCS via Twilio!',
-    }).then(m => {
-        console.log('message sent', m.sid);
-    });
+    // await twilioClient.messages.create({
+    //     // from: RCS_AGENT,
+    //     // to: `rcs:${NUMERO_PESSOAL}`,
+    //     to: `${NUMERO_PESSOAL}`,
+    //     messagingServiceSid: `MG508c8549b6b658a437810445e255ea7e`,
+    //     contentSid: 'HX35de91b4c0cad1474133320ed84f22b4',
+    //     // contentVariables: ''
+    //     contentVariables: JSON.stringify({1: 'tourismlogorcs'}),
+    //     // body: 'Hello from RCS via Twilio!',
+    // }).then(m => {
+    //     console.log('message sent', m.sid);
+    // });
 
 
 });
 
+
+
+app.get('mensagem', async (req, res) => {
+    res.sendFile(__dirname + '/public/mensagem.html');
+    const numero = req.query.numero;
+
+    res.send(`enviando mensagem para ${numero}`);
+
+    await twilioClient.messages.create({
+        // from: RCS_AGENT,
+        // to: `rcs:${NUMERO_RCS}`,
+        to: `${numero}`,
+        messagingServiceSid: `MG508c8549b6b658a437810445e255ea7e`,
+        contentSid: 'HX35de91b4c0cad1474133320ed84f22b4',
+        // contentVariables: ''
+        contentVariables: JSON.stringify({1: 'tourismlogorcs'}),
+        // body: 'Hello from RCS via Twilio!',
+    }).then(m => {
+        console.log('message sent', m.sid);
+    });
+
+});
 
 app.use(express.static('public'));
 
