@@ -81,8 +81,8 @@ const { downloadTwilioMedia } = require('./utils');
 const sendPlaceDetails = async (to, from, place) => {
 
     return await twilioClient.messages.create({
-        from: RCS_AGENT,
-        to: `rcs:${NUMERO_RCS}`,
+        from: from,
+        to: to,
         messagingServiceSid: `MG508c8549b6b658a437810445e255ea7e`,
         contentSid: LOCAL_TEMPLATE_SID,
         contentVariables: JSON.stringify({
@@ -187,7 +187,7 @@ app.post('/message', async (req, res) => {
                 }
 
                 if (messageItem) {
-                        await sendPlaceDetails(NUMERO_RCS, RCS_AGENT, messageItem);
+                        await sendPlaceDetails(message.To, message.From, messageItem);
                         // save messageHistory to firestore
                         messageHistory.push({
                             role: "assistant",
@@ -300,8 +300,8 @@ app.post('/message', async (req, res) => {
         });
 
         await twilioClient.messages.create({
-            from: RCS_AGENT,
-            to: `rcs:${NUMERO_RCS}`,
+            from: message.To,
+            to: message.From,
             messagingServiceSid: `MG508c8549b6b658a437810445e255ea7e`,
 
             body: response.output_text
