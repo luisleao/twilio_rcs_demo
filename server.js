@@ -43,7 +43,7 @@ const PROMPT = `
         Não formate o texto em markdown e não use formatações com **!
         Foque em apenas uma dica por vez e não liste múltiplas opções de uma vez só.
         Chame a função send_highlights caso o usuário peça por sugestões de pontos turísticos ou atrações de destaque.
-
+        Caso o usuário faça uma pergunta, considere o histórico de mensagens a última localização que foi enviada. Caso não tenha nenhum destaque específico enviado, você pode sugerir que o usuário envie uma localização para que você possa ajudar melhor ou informe o local onde ele está.
     `
 
 messageHistory.push(
