@@ -296,7 +296,7 @@ app.post('/message', async (req, res) => {
         console.log('response', response);
         messageHistory.push({
             role: "assistant",
-            content: response.output[0].content.split('**').join('') // remove markdown bold,
+            content: response.output_text[0].content // remove markdown bold,
         });
 
         await twilioClient.messages.create({
