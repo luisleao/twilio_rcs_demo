@@ -309,6 +309,7 @@ app.post('/message', async (req, res) => {
     }
 
 
+    console.log('messageHistory', messageHistory)
     // save messageHistory to firestore
     await userRef.set({
         messages: messageHistory,
